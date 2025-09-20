@@ -5,3 +5,5 @@
 
 ## Домашняя работа
 [26.09.2025] - _В процессе_ 🕐
+
+![Котик](https://github.com/SayGGGo/TalantiFM/blob/main/kitten-cat.gif)
