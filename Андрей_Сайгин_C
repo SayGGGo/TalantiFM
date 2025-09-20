@@ -1,0 +1,34 @@
+# Controlwork 20.09 /
+# Сайгин Андрей ИИ-72 /
+# Уровень C --- /
+def translate_data(kb):
+    print(f"Мегабайты: {kb*0.001}")
+    print(f"Биты: {kb*8000}")
+    print(f"Байты: {kb*1000}")
+
+def list_info():
+        print(f"Если в символах: {64*112*2}")
+        print("Принты, используя прошлую функцию:")
+        translate_data(6*64*112/8000)
+
+def weather(temperature):
+    if temperature < -20:
+        return "Лучше на улицу вообще не выходить. Если нужно, то всё самое жесткое."
+    elif temperature < -10:
+        return "Куртка, перчатки, штаны, валенки или ботинки."
+    elif temperature < 0:
+        return "Куртка, перчатки не обязательно, но будет без них не комфортно, штаны и ботинки."
+    elif temperature < 10:
+        return "Куртку можно, кофта, штаны, ботинки"
+    elif temperature < 20:
+        return "Футболка, кофту, штаны."
+    elif temperature < 50:
+        return "Футболка и шорты"
+    elif temperature > 50:
+        return "Ну хз"
+
+translate_data(1)
+print("-"*20)
+list_info()
+print("-"*20)
+print(weather(int(input("Введите температуру в градусах C: "))))
