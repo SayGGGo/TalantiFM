@@ -1,0 +1,122 @@
+# Сайгин Андрей Евгеньевич
+# Уровень: B
+# 27 09 2025
+
+from time import sleep
+from random import randint
+
+
+def good_animations(string, speed=0.1, effect=False):
+    text = ""
+    for i in string:
+        text += i
+        if effect:
+            print("\n" * 100)
+            print(text)
+            sleep(speed)
+        else:
+            print(string)
+            break
+
+
+def translate_data(kb):
+    print(f"| Мегабайты: {kb * 0.001}")
+    print(f"| Биты: {kb * 8000}")
+    print(f"| Байты: {kb * 1000}")
+
+
+def task1():
+    print(f"| 1000 бит -> {1000 / 8e+12} терабайт 😮")
+    print(f"| 1000 бит -> {1000 / 8e+2} гигабайт 😯")
+    print(f"| 1000 бит -> {1000 / 8e+6} мегабайт 🤨")
+    print(f"| 1000 бит -> {1000 / 8000} килобайт 😒")
+
+
+def task2():
+    # Использую функцию из прошлой контрольной
+    translate_data(60 * 1000 * 2)
+
+
+def task3():
+    temperature = int(input("Введите температуру: "))
+    if temperature < -20:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Снег")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Можно, если осторожно. Надень куртку, сапоги, штаны, шапку, не забудь перчатки!", effect=True)
+        else:
+            good_animations("Дома сиди!")
+    elif temperature < -10:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Снег")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Надень куртку, сапоги, штаны, шапку, перчатки", effect=True)
+        else:
+            good_animations("Можно, если осторожно. Надень куртку, сапоги, штаны, шапку, не забудь перчатки!", effect=True)
+    elif temperature < 0:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Снег")
+        good_animations("3. Дождь")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Надень куртку, кросовки, штаны, шапку, можно перчатки", effect=True)
+        else:
+            good_animations("Надень куртку, сапоги, штаны, шапку, перчатки", effect=True)
+    elif temperature < 10:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Дождь")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Надень куртку/кофту, кросовки, штаны, шапку", effect=True)
+        else:
+            good_animations("Надень куртку, сапоги, штаны, шапку", effect=True)
+    elif temperature < 20:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Дождь")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Надень кофту, кросовки, штаны, кепку", effect=True)
+        else:
+            good_animations("Надень куртку, сапоги, штаны, шапку/кепку", effect=True)
+    elif temperature < 30:
+        good_animations("Теперь выберите погоду:", 0.05)
+        good_animations("1. Солнечно")
+        good_animations("2. Дождь")
+        weather = int(input("\nПисать цифру сюда:"))
+        if weather == 1:
+            good_animations("Надень футболку, сандали, шорты, кепку", effect=True)
+        else:
+            good_animations("Надень ветровку, кросовки/сапоги, шорты/штаны, кепку", effect=True)
+    else:
+        good_animations("Надень футболку, сандали, шорты, кепку", effect=True)
+
+
+print("Контрольная работа 2. 27.09.2025")
+for time in range(30):
+    print("\n" * 50)
+    print(f"Таланты ФМ / Контрольная работа 2")
+    print(("◼" * time) + ("◼️" * (30 - time)))
+    sleep(randint(1, 3) / 100)
+
+print("\n" * 15)
+
+good_animations("--- Задача 1 ----------\n", effect=True)
+task1()
+sleep(5)
+good_animations("--- Задача 2 ----------\n", effect=True)
+task2()
+sleep(5)
+good_animations("--- Задача 3 ----------\n", effect=True)
+good_animations("Введите температуру:", 0.05, effect=True)
+print("\n" * 50)
+task3()
+sleep(5)
+print("\n" * 5)
+good_animations("Спасибо за запуск!\nПожалуйста, можно балл побольше)\nСайгин Андрей ИИ-71", 0.05, effect=True)
