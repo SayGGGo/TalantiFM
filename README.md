@@ -4,6 +4,8 @@
 | [20.09.2025](https://github.com/SayGGGo/TalantiFM/blob/main/Andrey_Saygin_C) - Уровень **C** | Решено: **3/3** | 1️⃣ |
 | [27.09.2025](https://github.com/SayGGGo/TalantiFM/blob/main/Controlwork2) - Уровень **B** | Решено: **3/3** | 2️⃣ |
 
+![Белка](https://github.com/SayGGGo/TalantiFM/blob/main/kitten-cat.gif)](https://cs.pikabu.ru/post_img/2013/08/01/11/1375381904_539974474.gif)
+
 ## Домашняя работа
 [26.09.2025] - _Прочитано_
 
