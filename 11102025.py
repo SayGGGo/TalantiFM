@@ -1,17 +1,15 @@
-import random
-
 def task1(n):
     matrix_gen = []
     for i in range(n):
         matrix_string = []
         for j in range(n):
-            if n-i-1==j:
+            if n - i - 1 == j:
                 matrix_string.append("1")
             else:
-                if n - (i) - 1 > j:
+                if n - i - 1 > j:
                     matrix_string.append("0")
                 else:
-                    if n - (i) - 1 < j:
+                    if n - i - 1 < j:
                         matrix_string.append("2")
         matrix_gen.append(matrix_string)
 
@@ -26,11 +24,11 @@ def task2(n):
     for i in range(n):
         matrix_string = []
         for j in range(n):
-            if n-i-1==j:
+            if n - i - 1 == j:
                 matrix_string.append("0")
             else:
                 for num in range(1, n):
-                    if n - (i+num) - 1 == j or n - (i-num) - 1 == j:
+                    if n - (i + num) - 1 == j or n - (i - num) - 1 == j:
                         matrix_string.append(num)
         matrix_gen.append(matrix_string)
 
@@ -39,7 +37,8 @@ def task2(n):
             print(element, end='\t')
         print()
 
-def task3(n,m):
+
+def task3(n, m):
     matrix_gen = []
     status = 0
     for i in range(n):
@@ -58,6 +57,32 @@ def task3(n,m):
             print(element, end='\t')
         print()
 
+def task4(n):
+    matrix_gen = []
+    for i in range(n):
+        matrix_string = []
+        for j in range(n):
+            if i == n//2:
+                matrix_string.append("*")
+            else:
+                if j == n // 2:
+                    matrix_string.append("*")
+                else:
+                    if n - i - 1 == j:
+                        matrix_string.append("*")
+                    else:
+                        if i == j:
+                            matrix_string.append("*")
+                        else:
+                            matrix_string.append(" ")
+        matrix_gen.append(matrix_string)
+
+    for row in matrix_gen:
+        for element in row:
+            print(element, end='\t')
+        print()
+
+
 number = int(input("[TASK 1] Введите n > "))
 task1(number)
 number = int(input("[TASK 2] Введите n > "))
@@ -65,4 +90,5 @@ task2(number)
 number = int(input("[TASK 3] Введите n > "))
 number_m = int(input("[TASK 3] Введите m > "))
 task3(number, number_m)
-
+number = int(input("[TASK 4] Введите n > "))
+task4(number)
