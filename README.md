@@ -3,7 +3,7 @@
 ## Классные работы
 | [11.10.2025]() - Уровень **C** | Решено: **3/3** | 1️⃣ |
 
-![Луна]([https://github.com/SayGGGo/TalantiFM/blob/main/kitten-cat.gif](https://i.pinimg.com/originals/fc/e2/23/fce223dcd02fa91e8daff1b83b3c163a.gif))
+![Я](https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif)
 
 ## Самостоятельные работы
 | [20.09.2025](https://github.com/SayGGGo/TalantiFM/blob/main/Andrey_Saygin_C) - Уровень **C** | Решено: **3/3** | 1️⃣ |
