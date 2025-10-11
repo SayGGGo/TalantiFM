@@ -1,0 +1,143 @@
+def geometry_matrix(figure, n, element):
+    if figure == 1:
+        matrix_gen = []
+        for i in range(n):
+            matrix_string = []
+            for j in range(n):
+                if i == 0:
+                    matrix_string.append(element)
+                else:
+                    if i == n-1:
+                        matrix_string.append(element)
+                    else:
+                        if j == 0:
+                            matrix_string.append(element)
+                        else:
+                            if j == n-1:
+                                matrix_string.append(element)
+                            else:
+                                matrix_string.append("")
+            matrix_gen.append(matrix_string)
+        return matrix_gen
+    elif figure == 2:
+        matrix_gen = []
+        for i in range(n):
+            matrix_string = []
+            for j in range(n):
+                if n-j-1 == i and j >= n//2:
+                    matrix_string.append(element)
+                else:
+                    if j == i and j <= n//2:
+                        matrix_string.append(element)
+                    else:
+                        if i == 0:
+                            matrix_string.append(element)
+                        else:
+                            matrix_string.append(" ")
+            matrix_gen.append(matrix_string)
+        matrix_gen.reverse()
+        return matrix_gen
+
+    elif figure == 3:
+        matrix_gen = []
+        for i in range(n):
+            matrix_string = []
+            for j in range(n):
+                if n - j - 1 == i and j >= n // 2:
+                    matrix_string.append("*")
+                else:
+                    if j == i and j <= n // 2:
+                        matrix_string.append("*")
+                    else:
+                        matrix_string.append(" ")
+            matrix_gen.append(matrix_string)
+
+        matrix_gen_copy = matrix_gen.copy()
+        matrix_gen_copy.reverse()
+        for row in matrix_gen_copy[0:-1]:
+            for element in row:
+                print(element, end="\t")
+            print()
+
+        return matrix_gen
+
+    elif figure == 4:
+        matrix_gen = []
+        for i in range(n):
+            matrix_string = []
+            for j in range(n):
+                if i == n // 2:
+                    matrix_string.append(element)
+                else:
+                    if j == n // 2:
+                        matrix_string.append(element)
+                    else:
+                        if n - i - 1 == j:
+                            matrix_string.append(element)
+                        else:
+                            if i == j:
+                                matrix_string.append(element)
+                            else:
+                                matrix_string.append(" ")
+            matrix_gen.append(matrix_string)
+        return matrix_gen
+
+    elif figure == 5:
+        matrix_gen = []
+        for i in range(n):
+            matrix_string = []
+            for j in range(n):
+                if n - j - 1 == i and j >= n // 2:
+                    matrix_string.append("*")
+                else:
+                    if j == i and j <= n // 2:
+                        matrix_string.append("*")
+                    else:
+                        matrix_string.append(" ")
+            matrix_gen.append(matrix_string)
+
+        matrix_gen_copy = matrix_gen.copy()
+        matrix_gen_copy.reverse()
+        for row in matrix_gen_copy:
+            for element in row:
+                print(element, end="\t")
+            print()
+
+        return matrix_gen
+    elif figure == 6:
+        print("SOON...")
+        return [[]]
+
+
+while True:
+    dict_fig = {
+        1: "Квадратик □",
+        2: "Треуголка △",
+        3: "Ромбик    ◊",
+        4: "Звездочка *",
+        5: "Кружок    о",
+        6: "Секретно  ?"
+    }
+    print("[ <<<--- GEOMETRY MATRIX --->>> ]")
+    print("[ 1. Квадратик □  \         /   ]")
+    print("[ 2. Треуголка △   \       /    ]")
+    print("[ 3. Ромбик    ◊    \     /     ]")
+    print("[ 4. Звездочка *     \   /      ]")
+    print("[ 5. Кружок    о      \ /       ]\n"
+          "[ 6. Секретно  ?       *        ]\n")
+    try:
+        fig = int(input("> "))
+        print(f"\n[ --- {dict_fig[fig]} --- ]")
+        print("[ Введите размер фигуры:  ]\n")
+        size_fig = int(input("> "))
+        print("[ Какой символ использовать?: ]\n")
+        elem = input("> ")
+
+        for row in geometry_matrix(fig, size_fig, elem):
+            for element in row:
+                print(element, end="\t")
+            print()
+        input("--- Enter для выхода ---")
+
+    except Exception:
+        print("[ERROR] Ошибка, попробуйте ещё раз")
