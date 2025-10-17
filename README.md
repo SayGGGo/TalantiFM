@@ -2,6 +2,7 @@
 
 ## Классные работы
 | [11.10.2025](https://github.com/SayGGGo/TalantiFM/blob/main/11102025.py) - Решено: **3/3** | 1️⃣ |
+! [11.10.2025](https://github.com/SayGGGo/TalantiFM/blob/main/geomety) - Геометри
 
 ![Я](https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif)
 
