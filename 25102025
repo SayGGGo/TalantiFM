@@ -1,0 +1,261 @@
+# Контрольная работа 25.10.2025
+# Сайгин Андрей Евгеньевич
+# Уровень: C
+# Ниже в коде написан класс LuckyTools, в моем профиле на GitHub есть репозиторий.
+# Это часть нужна только для цветных выводов в консоли без colorama. Больше в нем ничего нет.
+# Элементы из этого кода были взяты из Stack Overflow
+
+import random
+import time
+import math
+import sys
+
+
+class LuckyTools:
+    def __init__(self, prefix_name=None, prefix_hex=None, prefix_short=None, show_warns=True, show_init=True):
+        try:
+            self.prefix = prefix_name
+            self.prefix_hex = prefix_hex
+            self.frame = time.time()
+
+            if show_warns:
+                if prefix_name == None:
+                    self.prefix = "⌊ LuckyTools ⌉ »"
+                    print(self.fore_fromhex(self.prefix, "ffce6b"),
+                          self.fore_fromhex(" Не указано значение:", "ffaa00"),
+                          self.fore_fromhex("префикс.", "ffce6b"))
+                if prefix_hex == None:
+                    self.prefix_hex = "00FF5A"
+                    print(self.fore_fromhex(self.prefix, "ffce6b"),
+                          self.fore_fromhex(" Не указано значение:", "ffaa00"),
+                          self.fore_fromhex("цвет префикса.", "ffce6b"))
+                if prefix_short == None:
+                    self.prefix_short = "⌊ LT ⌉ »"
+                    print(self.fore_fromhex(self.prefix, "ffce6b"),
+                          self.fore_fromhex(" Не указано значение:", "ffaa00"),
+                          self.fore_fromhex("сокращенный префикс.", "ffce6b"))
+            else:
+                if prefix_name == None:
+                    self.prefix = "⌊ LuckyTools ⌉ »"
+                if prefix_hex == None:
+                    self.prefix_hex = "00FF5A"
+                if prefix_short == None:
+                    self.prefix_short = "⌊ LT ⌉ »"
+            if show_init:
+                self.fade_print("Успешная инициализация", color=self.prefix_hex, time_show=0.1, white_tag=True)
+        except Exception as ex:
+            print(self.fore_fromhex("⌊ LuckyTools ⌉ »", "ff1414"),
+                  self.fore_fromhex(" Ошибка инициализации", "ff8080"),
+                  self.fore_fromhex("LuckyTools: ", "ff1414"),
+                  self.fore_fromhex(f"{ex}", "ff8080"))
+
+    def print(self, text):
+        if type(text) == list:
+            print(self.fore_fromhex(self.prefix_short, self.prefix_hex),
+                  self.fore_fromhex(f"Показано", "adwadad"),
+                  self.fore_fromhex(f"{len(text)} элементов:", self.prefix_hex))
+            for i in text:
+                print(self.fore_fromhex("»", self.prefix_hex),
+                      self.fore_fromhex(i, "ffffff"))
+        elif type(text) == str or type(text) == int or type(text) == float:
+            print(self.fore_fromhex(self.prefix_short, self.prefix_hex),
+                  self.fore_fromhex(text, "ffffff"))
+        elif type(text) == dict:
+            print(self.fore_fromhex(self.prefix_short, self.prefix_hex),
+                  self.fore_fromhex("Показано", "adwadad"),
+                  self.fore_fromhex(f"{len(text)} пар ключ-значение:", self.prefix_hex))
+            for key, value in text.items():
+                print(self.fore_fromhex(f"{key}:", self.prefix_hex),
+                      self.fore_fromhex(value, "ffffff"))
+
+    def fade(self, text, text_hex="00FF5A", seconds=1, speed=3, white_tag=False):
+        try:  # Ошибки
+            time_fade = 0  # Время
+            while time_fade < seconds:  # Время анимации от пользователя
+                if white_tag:  # Белая тема
+                    colored_text = f"{self.fore_fromhex(self.prefix_short, 'ffffff')} "  # Изначальный текст
+                else:
+                    colored_text = f"{self.fore_fromhex(self.prefix_short, self.prefix_hex)} "  # Изначальный текст
+                self.frame = time.time()  # Создаем покадровую анимацию. Используем UNIX time
+                amplitude = 45  # Используем амплитуду для блеска
+                Red, Green, Blue = self.hex_to_rgb(text_hex)  # Получаем цвета которые будем использовать
+
+                for i, char in enumerate(text):  # Изменяем фазу и высчитываем волну через синусы
+                    phase = self.frame * speed + i * 0.4
+                    wave_value = math.sin(phase)
+                    brightness_offset = int(wave_value * amplitude)  # Эффект блеска, яркость
+
+                    # ргб + яркость блеска
+                    r = max(0, min(255, Red + brightness_offset))
+                    g = max(0, min(255, Green + brightness_offset))
+                    b = max(0, min(255, Blue + brightness_offset))
+                    # формула rgb со стек оверфлоу
+                    hex_code = f"{r:02x}{g:02x}{b:02x}"
+                    # Сохраняем символ
+                    colored_text += self.fore_fromhex(char, hex_code)
+
+                # Через sys чтобы не дублировалась, а менялась
+                sys.stdout.write(f"\r{colored_text}")
+                sys.stdout.flush()
+                # Смещаем блеск
+                time_fade += 0.02
+                # Плавность
+                time.sleep(0.02)
+        except:
+            pass  # Остановка анимации без ошибки
+
+    def fade_print(self, text, time_show=10, speed=3, color="00FF5A", white_tag=False):
+        self.fade(text, color, speed=speed, seconds=time_show, white_tag=white_tag)
+        print()
+
+    def cleanhex(self, data):
+        # Взято со Stack Overflow
+        valid_hex = '0123456789ABCDEF'.__contains__
+        return ''.join(filter(valid_hex, data.upper()))
+
+    def fore_fromhex(self, text, hexcode, tag=False):
+        # Взято со Stack Overflow
+        hexcode = self.cleanhex(hexcode)
+        red = int(hexcode[0:2], 16)
+        green = int(hexcode[2:4], 16)
+        blue = int(hexcode[4:6], 16)
+        if tag:
+            tag_text = self.fore_fromhex(self.prefix_short, self.prefix_hex)
+            return tag_text, "\x1B[38;2;{};{};{}m{}\x1B[0m".format(red, green, blue, text)
+        return "\x1B[38;2;{};{};{}m{}\x1B[0m".format(red, green, blue, text)
+
+    def hex_to_rgb(self, hexcode):
+        # Взято со Stack Overflow
+        hexcode = self.cleanhex(hexcode)
+        if len(hexcode) < 6:
+            return 255, 206, 107
+        try:
+            r = int(hexcode[0:2], 16)
+            g = int(hexcode[2:4], 16)
+            b = int(hexcode[4:6], 16)
+            return r, g, b
+        except ValueError:
+            return 255, 206, 107
+
+
+tools = LuckyTools(show_warns=False, show_init=False)
+
+
+def first_task(n, element):
+    matrix_gen = []
+    for i in range(n):
+        matrix_string = []
+        for j in range(n):
+            if n - j - 1 == i and j >= n // 2:
+                matrix_string.append(element)
+            else:
+                if j == i and j <= n // 2:
+                    matrix_string.append(element)
+                else:
+                    if i == 0:
+                        matrix_string.append(element)
+                    else:
+                        matrix_string.append(" ")
+        matrix_gen.append(matrix_string)
+    matrix_gen.reverse()
+    for row in matrix_gen:
+        for element in row:
+            print(element, end='\t')  # Ставит в конце таб
+        print()  # перенос строки
+
+
+def second_task(a, b, number):
+    if a <= number <= b:
+        return True
+    return False
+
+
+def third_task(n):
+    matrix = []
+    for i in range(n):
+        matrix_string = []
+        for j in range(n):
+            matrix_string.append(random.randint(0, 9))
+        matrix.append(matrix_string)
+    matrix_old = matrix
+    matrix = []
+    for i in range(n):
+        matrix_string = []
+        for j in range(n):
+            try:
+                matrix_string.append(matrix_old[i][j + 1])
+            except:
+                matrix_string.append(matrix_old[i][0])
+        matrix.append(matrix_string)
+
+    for row in matrix_old:
+        for element in row:
+            print(element, end='\t')  # Ставит в конце таб
+        print()  # перенос строки
+
+    print()
+    for row in matrix:
+        for element in row:
+            print(element, end='\t')  # Ставит в конце таб
+        print()  # перенос строки
+
+
+tools = LuckyTools(show_warns=False, show_init=False)
+tools.print("Задача 1")
+while True:
+    try:
+        tools.print("n = _ | ?")
+        n = int(input("Введите размер: "))
+        tools.print(f"n = {n} | element = _")
+        element = input("Введите элемент контура: ")
+        tools.print(f"n = {n} | element = {element}")
+        print()
+        first_task(n, element)
+        print()
+        tools.fade_print(f"Треугольник успешно построен", white_tag=True, time_show=2)
+        break
+    except ValueError:
+        tools.fade_print("Не верный формат. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    except Exception:
+        tools.fade_print("Произошла ошибка при выполнении. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    print()
+
+print()
+tools.print("Задача 2")
+while True:
+    try:
+        tools.print("a = _ | ? | ?")
+        a = int(input("Введите минимум: "))
+        tools.print(f"a = {a} | b = _ | ?")
+        b = int(input("Введите максимум: "))
+        tools.print(f"a = {a} | b = {b} | n = _")
+        c = int(input("Введите число: "))
+        tools.print(f"a = {a} | b = {b} | n ={c}")
+        print()
+        tools.fade_print(f"Функция вернула ответ: {second_task(a,b,c)}", white_tag=True, time_show=2)
+        break
+    except ValueError:
+        tools.fade_print("Не верный формат. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    except Exception:
+        tools.fade_print("Произошла ошибка при выполнении. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    print()
+
+print()
+tools.print("Задача 2")
+while True:
+    try:
+        tools.print("n = _")
+        n = int(input("Сколько случайных чисел нужно сгенерировать: "))
+        tools.print(f"n = {n}")
+        third_task(n)
+        print()
+        tools.fade_print(f"Успешный вывод 2-х матриц", white_tag=True, time_show=2)
+        break
+    except ValueError:
+        tools.fade_print("Не верный формат. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    except Exception:
+        tools.fade_print("Произошла ошибка при выполнении. Попробуйте ещё раз.", color="f56042", white_tag=True, time_show=1)
+    print()
+
+print()
+tools.print("Спасибо за использование!")
