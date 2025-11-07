@@ -1,0 +1,33 @@
+def first_task(n, cnt=0):
+    if cnt == n:
+        print(cnt)
+        return n
+
+    print(cnt)
+    return first_task(n, cnt+1)
+
+
+def second_task(a, b, cnt=0):
+    if cnt == 0:
+        cnt = min(a,b)
+    elif cnt == max(a,b):
+        print(cnt)
+        return cnt
+
+    print(cnt)
+    second_task(a,b,cnt+1)
+
+
+def third_task(n, step=2):
+    try:
+        if n == step:
+            return "YES"
+        return third_task(n, step*2)
+    except RecursionError:
+        return "NO"
+
+
+def fourth_task(n):
+    if n == 1 or n == 2:
+        return 1
+    return fourth_task(n-1) + fourth_task(n-2)
