@@ -16,5 +16,7 @@
 - [26.09.2025] - _Прочитано_
 - [07.11.2025](https://github.com/SayGGGo/TalantiFM/blob/main/homework_07112025)
 - [04.12.2025](https://github.com/SayGGGo/TalantiFM/blob/main/homework_04122025.py)
+- [12.12.2025](https://github.com/SayGGGo/TalantiFM/blob/main/12122025.py)
+
 
 ![Котик](https://github.com/SayGGGo/TalantiFM/blob/main/kitten-cat.gif)
